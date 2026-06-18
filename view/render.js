@@ -52,6 +52,9 @@ export const renderFriends = (friends) => {
 
   container.innerHTML = "";
 
+  document.querySelector(".friends-container-header-text").textContent =
+    `Friends (${friends.length})`;
+
   friends.forEach((friend) => {
     const friendCard = document.createElement("div");
     friendCard.classList.add("friend-card-container");
