@@ -122,7 +122,6 @@ main {
   display: flex;
   flex-wrap: wrap;
 
-  max-width: 1440px;
   height: 100%;
 
   margin-left: auto;
@@ -426,6 +425,33 @@ main {
   color: #ffb786;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+.aboutMe-card-container {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid #2a2a2a;
+}
+.aboutMe-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #424754;
+  color: #adc6ff;
+}
+.aboutMe-card-header-title {
+  font-family: Inter;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+.aboutMe-card-footer-text {
+  font-size: 1rem;
+  line-height: 1.625;
+  color: #c2c6d6;
 }
 /*=============================================================*/
 @media (min-width: 768px) {
