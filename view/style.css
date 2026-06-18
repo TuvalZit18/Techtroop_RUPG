@@ -110,7 +110,6 @@ header {
   border: 1px solid #424754;
 }
 .header-right-current-user-title {
-  display: none;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;

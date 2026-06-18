@@ -93,6 +93,21 @@ export const renderSavedUsersDropdown = (pages) => {
     container.appendChild(li);
   });
 };
+export const renderDropdownLabel = (firstName, lastName) => {
+  const label = document.querySelector(".saved-users-dropdown-container-text");
+  label.textContent = `${firstName} ${lastName}`;
+};
+const getInitials = (firstName, lastName) => {
+  return `${firstName[0]}${lastName[0]}`.toUpperCase();
+};
+
+export const renderHeaderUser = (user) => {
+  const avatar = document.querySelector(".header-right-current-user-avatar");
+  const title = document.querySelector(".header-right-current-user-title");
+
+  avatar.src = user.picture.large;
+  title.textContent = getInitials(user.firstName, user.lastName);
+};
 
 export const renderUserPage = (userPage) => {
   renderProfileCard(userPage.mainUser);
@@ -100,4 +115,5 @@ export const renderUserPage = (userPage) => {
   renderQuote(userPage.quote);
   renderAbout(userPage.about);
   renderFriends(userPage.friends);
+  renderHeaderUser(userPage.mainUser);
 };
