@@ -16,12 +16,19 @@ export const renderPokemonCard = (pokemon) => {
 
   document.querySelector(".pokemon-name").textContent = pokemon.name;
 
-  document.querySelector(".pokemon-type").textContent = Array.isArray(
-    pokemon.type,
-  )
-    ? pokemon.type[0]
-    : pokemon.type;
+  const card = document.querySelector(".pokemon-card-container");
+  const type = document.querySelector(".pokemon-type");
+  if (Array.isArray(pokemon.type)) {
+    type.textContent = pokemon.type[0];
 
+    card.className = card.className.replace(/\btype-\w+\b/g, "").trim();
+    card.classList.add(`type-${pokemon.type[0]}`);
+  } else {
+    type.textContent = pokemon.type;
+
+    card.className = card.className.replace(/\btype-\w+\b/g, "").trim();
+    card.classList.add(`type-${pokemon.type}`);
+  }
   document.querySelector(".pokemon-description").textContent =
     pokemon.description;
 
