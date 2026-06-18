@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #131313;
+  color: #e5e2e1;
+  font-family: Inter;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+body::selection {
+  background-color: #4d8eff;
+  color: #00285d;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  width: 100%;
+  height: 4rem;
+  padding-left: 24px;
+  padding-right: 24px;
+  flex-shrink: 0;
+  background-color: #131313;
+  border-bottom: 1px solid #353534;
+}
+.header-left-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #adc6ff;
+}
+.nav-menu-container {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+}
+.nav-menu-item {
+  display: flex;
+}
+.nav-menu-item-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #c2c6d6;
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+.nav-menu-item-link:hover {
+  cursor: pointer;
+  background-color: #201f1f;
+}
+.nav-menu-item-link-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.header-right-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.header-right-divider {
+  height: 2rem;
+  width: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: #424754;
+}
+.header-right-current-user-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 0.5rem;
+}
+.header-right-current-user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 1px solid #424754;
+}
+.header-right-current-user-titl {
+  display: none;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+/*=============================================================*/
+@media (min-width: 768px) {
+  .nav-menu-container {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .element {
+    display: block;
+  }
+}
