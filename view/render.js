@@ -31,3 +31,7 @@ export const renderPokemonCard = (pokemon) => {
 export const renderQuote = (quote) => {
   document.querySelector(".kanye-quote-text").textContent = quote;
 };
+
+export const renderAbout = (about) => {
+  document.querySelector(".aboutMe-card-footer-text").textContent = about;
+};
