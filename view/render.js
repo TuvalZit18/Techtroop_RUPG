@@ -86,6 +86,7 @@ export const renderSavedUsersDropdown = (pages) => {
     container.appendChild(li);
   });
 };
+
 export const renderUserPage = (userPage) => {
   renderProfileCard(userPage.mainUser);
   renderPokemonCard(userPage.pokemon);
