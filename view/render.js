@@ -72,3 +72,24 @@ export const renderFriends = (friends) => {
     container.appendChild(friendCard);
   });
 };
+export const renderSavedUsersDropdown = (pages) => {
+  const container = document.querySelector(".saved-users-dropdown-content");
+
+  container.innerHTML = "";
+
+  pages.forEach((page) => {
+    const li = document.createElement("li");
+
+    li.textContent = `${page.mainUser.firstName} ${page.mainUser.lastName}`;
+    li.dataset.id = page.id;
+
+    container.appendChild(li);
+  });
+};
+export const renderUserPage = (userPage) => {
+  renderProfileCard(userPage.mainUser);
+  renderPokemonCard(userPage.pokemon);
+  renderQuote(userPage.quote);
+  renderAbout(userPage.about);
+  renderFriends(userPage.friends);
+};
