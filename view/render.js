@@ -27,3 +27,7 @@ export const renderPokemonCard = (pokemon) => {
 
   document.querySelector(".pokemon-image").src = pokemon.image;
 };
+
+export const renderQuote = (quote) => {
+  document.querySelector(".kanye-quote-text").textContent = quote;
+};
