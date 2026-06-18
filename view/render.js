@@ -46,3 +46,26 @@ export const renderProfileCard = (user) => {
     ".profile-hero-card-location-container span:last-child",
   ).textContent = `${user.city}, ${user.state}`;
 };
+
+export const renderFriends = (friends) => {
+  const container = document.querySelector(".friends-grid");
+
+  container.innerHTML = "";
+
+  friends.forEach((friend) => {
+    const friendCard = document.createElement("div");
+    friendCard.classList.add("friend-card-container");
+
+    friendCard.innerHTML = `
+      <div class="friend-card-avatar-container">
+        <img class="friend-card-avatar" src="${friend.picture.large}" />
+        <div class="friend-status"></div>
+      </div>
+      <span class="friend-card-name-text">
+        ${friend.firstName} ${friend.lastName}
+      </span>
+    `;
+
+    container.appendChild(friendCard);
+  });
+};
