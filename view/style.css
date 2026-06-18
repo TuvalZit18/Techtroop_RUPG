@@ -109,7 +109,7 @@ header {
   object-fit: cover;
   border: 1px solid #424754;
 }
-.header-right-current-user-titl {
+.header-right-current-user-title {
   display: none;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -206,14 +206,18 @@ main {
   flex-direction: column;
   gap: 0.75rem;
 }
-.btnGenerateUsersPrimary {
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: Inter;
+}
+.btn-primary {
   width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   border-radius: 0.75rem;
   background-color: #4d8eff;
   color: #00285d;
@@ -221,39 +225,40 @@ main {
   box-shadow:
     0 10px 15px -3px rgba(173, 198, 255, 0.2),
     0 4px 6px -4px rgba(173, 198, 255, 0.2);
-  transition: all 0.15s ease;
-  opacity: 1;
 }
-.btnGenerateUsersPrimary:hover {
+
+.btn-primary:hover {
   filter: brightness(1.3);
-  cursor: pointer;
 }
-.btnGenerateUsersSecondary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+.btn-secondary {
+  width: 100%;
+  padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   background-color: #2a2a2a;
   color: #e5e2e1;
   border: 1px solid #424754;
-  font-family: Inter;
   font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.05em;
   font-weight: 600;
-  transition: background-color 0.15s ease;
+  letter-spacing: 0.05em;
 }
-.btnGenerateUsersSecondary:hover {
+
+.btn-secondary:hover {
   background-color: #393939;
 }
-.btnGenerateUsers:active {
+
+.btn-secondary:active {
   transform: scale(0.95);
 }
+
 .saved-users-dropdown {
   position: relative;
+}
+.saved-users-dropdown.open .saved-users-dropdown-content {
+  display: flex;
 }
 .saved-users-dropdown-container {
   display: flex;
@@ -282,7 +287,7 @@ main {
 }
 .saved-users-dropdown-content {
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   top: 100%;
   border-radius: 0.5rem;
@@ -477,6 +482,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  min-height: 200px;
 }
 .friend-card-container {
   display: flex;
@@ -489,6 +495,11 @@ main {
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.15s ease;
+  user-select: none;
+}
+.friend-card-container:hover {
+  border-color: #424754;
+  background-color: #232323;
 }
 .friend-card-avatar-container {
   position: relative;
@@ -499,6 +510,7 @@ main {
   border-radius: 9999px;
   object-fit: cover;
   border: 2px solid #353534;
+  background-color: #2a2a2a;
 }
 .friend-status {
   position: absolute;
