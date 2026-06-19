@@ -38,3 +38,30 @@ const bindEvents = () => {
     }
   });
 };
+const handleGenerate = async () => {
+  try {
+    const [users, pokemon, quote, about] = await Promise.all([
+      userAPI.getUsers(7),
+      pokemonAPI.getRandomPokemon(),
+      kanyeAPI.getQuote(),
+      ipsumAPI.getAbout(),
+    ]);
+
+    const userPage = {
+      id: crypto.randomUUID(),
+      mainUser: users[0],
+      friends: users.slice(1),
+      pokemon,
+      quote,
+      about,
+    };
+
+    currentPage = userPage;
+
+    renderUserPage(userPage);
+
+    document.querySelector('[data-action="save"]').disabled = false;
+  } catch (error) {
+    console.error("Error generating user page:", error);
+  }
+};
