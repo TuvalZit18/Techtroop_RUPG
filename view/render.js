@@ -81,21 +81,28 @@ export const renderFriends = (friends) => {
 };
 export const renderSavedUsersDropdown = (pages) => {
   const container = document.querySelector(".saved-users-dropdown-content");
+  const triggerContainer = document.querySelector(
+    ".saved-users-dropdown-container",
+  );
 
   container.innerHTML = "";
+  triggerContainer.classList.toggle("disabled", pages.length === 0);
 
   pages.forEach((page) => {
     const li = document.createElement("li");
-
     li.textContent = `${page.mainUser.firstName} ${page.mainUser.lastName}`;
     li.dataset.id = page.id;
-
     container.appendChild(li);
   });
 };
 export const renderDropdownLabel = (firstName, lastName) => {
   const label = document.querySelector(".saved-users-dropdown-container-text");
+  const triggerContainer = document.querySelector(
+    ".saved-users-dropdown-container",
+  );
+
   label.textContent = `${firstName} ${lastName}`;
+  triggerContainer.classList.add("has-selection");
 };
 const getInitials = (firstName, lastName) => {
   return `${firstName[0]}${lastName[0]}`.toUpperCase();

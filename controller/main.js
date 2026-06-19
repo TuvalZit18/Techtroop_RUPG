@@ -8,7 +8,6 @@ import {
   renderSavedUsersDropdown,
   renderDropdownLabel,
 } from "../view/render.js";
-import {} from "../view/render.js";
 let selectedPageId = null;
 let currentPage = null;
 document.addEventListener("DOMContentLoaded", () => {
@@ -36,11 +35,23 @@ const bindEvents = () => {
         break;
       case "load":
         handleLoad();
+        break;
       case "clear":
         handleClear();
+        break;
     }
   });
+  document.addEventListener("click", (e) => {
+    const dropdownWrapper = document.querySelector(".saved-users-dropdown");
+    const dropdownContent = document.querySelector(
+      ".saved-users-dropdown-content",
+    );
 
+    if (!dropdownWrapper.contains(e.target)) {
+      dropdownContent.classList.remove("open");
+      dropdownWrapper.classList.remove("open");
+    }
+  });
   document
     .querySelector(".saved-users-dropdown")
     .addEventListener("click", toggleDropdown);
@@ -52,6 +63,13 @@ const bindEvents = () => {
   document
     .querySelector(".saved-users-dropdown-container")
     .addEventListener("click", handleDropdownToggle);
+
+  document
+    .querySelector(".clear-selection-icon")
+    .addEventListener("click", (e) => {
+      e.stopPropagation();
+      handleClearSelection();
+    });
 };
 
 const handleGenerate = async () => {
@@ -118,15 +136,9 @@ const handleLoad = () => {
 
 const handleClear = () => {
   localStorage.removeItem("userPages");
-
-  selectedPageId = null;
-
-  document.querySelector(".saved-users-dropdown-content").innerHTML = "";
-
-  document.querySelector(".saved-users-dropdown-container-text").textContent =
-    "Select a saved profile...";
+  renderSavedUsersDropdown([]);
+  handleClearSelection();
 };
-
 const toggleDropdown = (e) => {
   e.currentTarget.classList.toggle("open");
 };
@@ -153,10 +165,12 @@ const handleDropdownSelect = (e) => {
     .querySelector(".saved-users-dropdown-content")
     .classList.remove("open");
 };
-const handleDropdownToggle = () => {
-  const dropdown = document.querySelector(".saved-users-dropdown-content");
-  const label = document.querySelector(".saved-users-dropdown-container-text");
 
+const handleDropdownToggle = () => {
+  const pages = JSON.parse(localStorage.getItem("userPages")) || [];
+  if (pages.length === 0) return;
+
+  const dropdown = document.querySelector(".saved-users-dropdown-content");
   const isOpen = dropdown.classList.contains("open");
 
   if (isOpen) {
@@ -164,14 +178,13 @@ const handleDropdownToggle = () => {
     return;
   }
 
-  // RESET behavior (X click or re-click when selected)
   if (selectedPageId) {
-    selectedPageId = null;
-    label.textContent = "Select a saved profile...";
+    handleClearSelection();
   }
 
   dropdown.classList.add("open");
 };
+
 const loadSavedPagesUI = () => {
   const pages = JSON.parse(localStorage.getItem("userPages")) || [];
   if (pages.length === 0) {
@@ -190,4 +203,15 @@ const loadSavedPagesUI = () => {
 
     document.querySelector('[data-action="save"]').disabled = false;
   }
+};
+const handleClearSelection = () => {
+  selectedPageId = null;
+
+  const label = document.querySelector(".saved-users-dropdown-container-text");
+  const triggerContainer = document.querySelector(
+    ".saved-users-dropdown-container",
+  );
+
+  label.textContent = "Select a saved profile...";
+  triggerContainer.classList.remove("has-selection");
 };
