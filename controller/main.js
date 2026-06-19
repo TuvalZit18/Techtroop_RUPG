@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const init = () => {
   bindEvents();
+  loadSavedPagesUI();
+  document.querySelector('[data-action="save"]').disabled = true;
 };
 
 const bindEvents = () => {
@@ -37,6 +39,7 @@ const bindEvents = () => {
       handleLoad();
     }
   });
+
   document
     .querySelector(".saved-users-dropdown")
     .addEventListener("click", toggleDropdown);
@@ -49,6 +52,7 @@ const bindEvents = () => {
     .querySelector(".saved-users-dropdown-container")
     .addEventListener("click", handleDropdownToggle);
 };
+
 const handleGenerate = async () => {
   try {
     const [users, pokemon, quote, about] = await Promise.all([
@@ -91,6 +95,7 @@ const handleSave = () => {
 
   renderSavedUsersDropdown(uniquePages);
 };
+
 const handleLoad = () => {
   if (!selectedPageId) {
     console.warn("No profile selected to load");
@@ -109,6 +114,7 @@ const handleLoad = () => {
 
   document.querySelector('[data-action="save"]').disabled = false;
 };
+
 const toggleDropdown = (e) => {
   e.currentTarget.classList.toggle("open");
 };
@@ -153,4 +159,23 @@ const handleDropdownToggle = () => {
   }
 
   dropdown.classList.add("open");
+};
+const loadSavedPagesUI = () => {
+  const pages = JSON.parse(localStorage.getItem("userPages")) || [];
+  if (pages.length === 0) {
+    handleGenerate();
+  } else {
+    renderSavedUsersDropdown(pages);
+
+    const lastPage = pages.length > 1 ? pages[pages.length - 1] : pages[0];
+    currentPage = lastPage;
+    selectedPageId = lastPage.id;
+    renderUserPage(lastPage);
+    renderDropdownLabel(
+      lastPage.mainUser.firstName,
+      lastPage.mainUser.lastName,
+    );
+
+    document.querySelector('[data-action="save"]').disabled = false;
+  }
 };
