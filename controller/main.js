@@ -109,3 +109,48 @@ const handleLoad = () => {
 
   document.querySelector('[data-action="save"]').disabled = false;
 };
+const toggleDropdown = (e) => {
+  e.currentTarget.classList.toggle("open");
+};
+
+const handleDropdownSelect = (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+
+  const id = li.dataset.id;
+
+  const pages = JSON.parse(localStorage.getItem("userPages")) || [];
+
+  const selectedPage = pages.find((page) => page.id === id);
+  if (!selectedPage) return;
+
+  selectedPageId = id;
+
+  renderDropdownLabel(
+    selectedPage.mainUser.firstName,
+    selectedPage.mainUser.lastName,
+  );
+
+  document
+    .querySelector(".saved-users-dropdown-content")
+    .classList.remove("open");
+};
+const handleDropdownToggle = () => {
+  const dropdown = document.querySelector(".saved-users-dropdown-content");
+  const label = document.querySelector(".saved-users-dropdown-container-text");
+
+  const isOpen = dropdown.classList.contains("open");
+
+  if (isOpen) {
+    dropdown.classList.remove("open");
+    return;
+  }
+
+  // RESET behavior (X click or re-click when selected)
+  if (selectedPageId) {
+    selectedPageId = null;
+    label.textContent = "Select a saved profile...";
+  }
+
+  dropdown.classList.add("open");
+};
