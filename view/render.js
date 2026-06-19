@@ -1,5 +1,10 @@
 // view/render.js
 
+/**
+ * Renders the main user's avatar, name, and location into the profile hero card.
+ * @param {Object} user - User object with picture, firstName, lastName, city, and state.
+ * @returns {void}
+ */
 export const renderMainUser = (user) => {
   document.querySelector(".profile-hero-card-avatar").src = user.picture.large;
 
@@ -11,6 +16,11 @@ export const renderMainUser = (user) => {
   ).textContent = `${user.city}, ${user.state}`;
 };
 
+/**
+ * Renders the pokemon card, including level, name, type, type color class, description, and image.
+ * @param {Object} pokemon - Pokemon object with level, name, type (string or array), description, and image.
+ * @returns {void}
+ */
 export const renderPokemonCard = (pokemon) => {
   document.querySelector(".pokemon-level").textContent = `LV.${pokemon.level}`;
 
@@ -35,14 +45,29 @@ export const renderPokemonCard = (pokemon) => {
   document.querySelector(".pokemon-image").src = pokemon.image;
 };
 
+/**
+ * Renders the Kanye quote text into the quote card.
+ * @param {string} quote - The quote text to display.
+ * @returns {void}
+ */
 export const renderQuote = (quote) => {
   document.querySelector(".kanye-quote-text").textContent = quote;
 };
 
+/**
+ * Renders the about me text into the about card.
+ * @param {string} about - The about me text to display.
+ * @returns {void}
+ */
 export const renderAbout = (about) => {
   document.querySelector(".aboutMe-card-footer-text").textContent = about;
 };
 
+/**
+ * Renders the main user's avatar, name, and location into the profile hero card.
+ * @param {Object} user - User object with picture, firstName, lastName, city, and state.
+ * @returns {void}
+ */
 export const renderProfileCard = (user) => {
   document.querySelector(".profile-hero-card-avatar").src = user.picture.large;
 
@@ -54,6 +79,11 @@ export const renderProfileCard = (user) => {
   ).textContent = `${user.city}, ${user.state}`;
 };
 
+/**
+ * Renders the list of friend cards into the friends grid and updates the friends count header.
+ * @param {Object[]} friends - Array of friend user objects, each with picture, firstName, and lastName.
+ * @returns {void}
+ */
 export const renderFriends = (friends) => {
   const container = document.querySelector(".friends-grid");
 
@@ -79,6 +109,13 @@ export const renderFriends = (friends) => {
     container.appendChild(friendCard);
   });
 };
+
+/**
+ * Renders the saved pages dropdown list and toggles the disabled state of the dropdown
+ * trigger and clear button based on whether any pages exist.
+ * @param {Object[]} pages - Array of saved userPage objects, each with id and mainUser.
+ * @returns {void}
+ */
 export const renderSavedUsersDropdown = (pages) => {
   const container = document.querySelector(".saved-users-dropdown-content");
   const triggerContainer = document.querySelector(
@@ -97,6 +134,13 @@ export const renderSavedUsersDropdown = (pages) => {
     container.appendChild(li);
   });
 };
+
+/**
+ * Updates the dropdown trigger label with the selected user's name and marks it as having a selection.
+ * @param {string} firstName - The selected user's first name.
+ * @param {string} lastName - The selected user's last name.
+ * @returns {void}
+ */
 export const renderDropdownLabel = (firstName, lastName) => {
   const label = document.querySelector(".saved-users-dropdown-container-text");
   const triggerContainer = document.querySelector(
@@ -106,10 +150,22 @@ export const renderDropdownLabel = (firstName, lastName) => {
   label.textContent = `${firstName} ${lastName}`;
   triggerContainer.classList.add("has-selection");
 };
+
+/**
+ * Builds a two-letter initials string from a first and last name.
+ * @param {string} firstName - The user's first name.
+ * @param {string} lastName - The user's last name.
+ * @returns {string} The uppercase two-letter initials.
+ */
 const getInitials = (firstName, lastName) => {
   return `${firstName[0]}${lastName[0]}`.toUpperCase();
 };
 
+/**
+ * Renders the current user's avatar and initials into the header.
+ * @param {Object} user - User object with picture, firstName, and lastName.
+ * @returns {void}
+ */
 export const renderHeaderUser = (user) => {
   const avatar = document.querySelector(".header-right-current-user-avatar");
   const title = document.querySelector(".header-right-current-user-title");
@@ -118,6 +174,11 @@ export const renderHeaderUser = (user) => {
   title.textContent = getInitials(user.firstName, user.lastName);
 };
 
+/**
+ * Renders an entire user page by delegating to all individual section render functions.
+ * @param {Object} userPage - Full page object with mainUser, pokemon, quote, about, and friends.
+ * @returns {void}
+ */
 export const renderUserPage = (userPage) => {
   renderProfileCard(userPage.mainUser);
   renderPokemonCard(userPage.pokemon);
