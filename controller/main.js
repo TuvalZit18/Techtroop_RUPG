@@ -37,6 +37,17 @@ const bindEvents = () => {
       handleLoad();
     }
   });
+  document
+    .querySelector(".saved-users-dropdown")
+    .addEventListener("click", toggleDropdown);
+
+  document
+    .querySelector(".saved-users-dropdown-content")
+    .addEventListener("click", handleDropdownSelect);
+
+  document
+    .querySelector(".saved-users-dropdown-container")
+    .addEventListener("click", handleDropdownToggle);
 };
 const handleGenerate = async () => {
   try {
