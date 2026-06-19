@@ -4,6 +4,8 @@
   margin: 0;
   padding: 0;
   border: none;
+  text-decoration: none;
+  color: inherit;
 }
 body {
   display: flex;
@@ -361,6 +363,17 @@ main {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   user-select: none;
+  animation: deal 0.4s ease-out;
+}
+@keyframes deal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .saved-users-dropdown-content > li:hover {
   background-color: #393939;
