@@ -65,3 +65,18 @@ const handleGenerate = async () => {
     console.error("Error generating user page:", error);
   }
 };
+const handleSave = () => {
+  if (!currentPage) return;
+
+  const existingPages = JSON.parse(localStorage.getItem("userPages")) || [];
+
+  const updatedPages = [...existingPages, currentPage];
+
+  const uniquePages = updatedPages.filter(
+    (page, index, arr) => arr.findIndex((p) => p.id === page.id) === index,
+  );
+
+  localStorage.setItem("userPages", JSON.stringify(uniquePages));
+
+  renderSavedUsersDropdown(uniquePages);
+};
