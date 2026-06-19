@@ -80,3 +80,21 @@ const handleSave = () => {
 
   renderSavedUsersDropdown(uniquePages);
 };
+const handleLoad = () => {
+  if (!selectedPageId) {
+    console.warn("No profile selected to load");
+    return;
+  }
+
+  const pages = JSON.parse(localStorage.getItem("userPages")) || [];
+
+  const selectedPage = pages.find((page) => page.id === selectedPageId);
+  if (!selectedPage) return;
+
+  currentPage = selectedPage;
+
+  userModel.addUserPage(selectedPage);
+  renderUserPage(selectedPage);
+
+  document.querySelector('[data-action="save"]').disabled = false;
+};
