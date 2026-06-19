@@ -19,4 +19,22 @@ const init = () => {
   bindEvents();
 };
 
-const bindEvents = () => {};
+const bindEvents = () => {
+  document.addEventListener("click", (e) => {
+    const action = e.target.closest("[data-action]")?.dataset.action;
+
+    if (!action) return;
+
+    if (action === "generate") {
+      handleGenerate();
+    }
+
+    if (action === "save") {
+      handleSave();
+    }
+
+    if (action === "load") {
+      handleLoad();
+    }
+  });
+};
