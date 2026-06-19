@@ -254,6 +254,26 @@ main {
 .btn-secondary:active {
   transform: scale(0.95);
 }
+.btn-danger {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #2a1414;
+  color: #ff8a8a;
+  border: 1px solid #6b2c2c;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.btn-danger:hover {
+  background-color: #3d1a1a;
+  border-color: #ff5c5c;
+}
+
+.btn-danger:active {
+  transform: scale(0.95);
+}
 
 .saved-users-dropdown {
   position: relative;

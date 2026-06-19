@@ -27,16 +27,17 @@ const bindEvents = () => {
 
     if (!action) return;
 
-    if (action === "generate") {
-      handleGenerate();
-    }
-
-    if (action === "save") {
-      handleSave();
-    }
-
-    if (action === "load") {
-      handleLoad();
+    switch (action) {
+      case "generate":
+        handleGenerate();
+        break;
+      case "save":
+        handleSave();
+        break;
+      case "load":
+        handleLoad();
+      case "clear":
+        handleClear();
     }
   });
 
@@ -113,6 +114,17 @@ const handleLoad = () => {
   renderUserPage(selectedPage);
 
   document.querySelector('[data-action="save"]').disabled = false;
+};
+
+const handleClear = () => {
+  localStorage.removeItem("userPages");
+
+  selectedPageId = null;
+
+  document.querySelector(".saved-users-dropdown-content").innerHTML = "";
+
+  document.querySelector(".saved-users-dropdown-container-text").textContent =
+    "Select a saved profile...";
 };
 
 const toggleDropdown = (e) => {
