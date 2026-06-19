@@ -14,12 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
   init();
 });
 
+/**
+ * Entry point. Binds all event listeners and loads saved pages on startup.
+ * @param {void} none
+ * @returns {void}
+ */
 const init = () => {
   bindEvents();
   loadSavedPagesUI();
   document.querySelector('[data-action="save"]').disabled = true;
 };
 
+/**
+ * Wires up all click event listeners for buttons, the dropdown, and click-outside handling.
+ * @param {void} none
+ * @returns {void}
+ */
 const bindEvents = () => {
   document.addEventListener("click", (e) => {
     const action = e.target.closest("[data-action]")?.dataset.action;
@@ -72,6 +82,11 @@ const bindEvents = () => {
     });
 };
 
+/**
+ * Fetches a new random user, pokemon, quote, and about text, then renders the page.
+ * @param {void} none
+ * @returns {Promise<void>}
+ */
 const handleGenerate = async () => {
   try {
     const [users, pokemon, quote, about] = await Promise.all([
@@ -99,6 +114,12 @@ const handleGenerate = async () => {
     console.error("Error generating user page:", error);
   }
 };
+
+/**
+ * Saves the current page to localStorage, avoiding duplicate ids, and refreshes the dropdown.
+ * @param {void} none
+ * @returns {void}
+ */
 const handleSave = () => {
   if (!currentPage) return;
 
@@ -115,6 +136,11 @@ const handleSave = () => {
   renderSavedUsersDropdown(uniquePages);
 };
 
+/**
+ * Loads the currently selected saved page from localStorage and renders it.
+ * @param {void} none
+ * @returns {void}
+ */
 const handleLoad = () => {
   if (!selectedPageId) {
     console.warn("No profile selected to load");
@@ -134,15 +160,31 @@ const handleLoad = () => {
   document.querySelector('[data-action="save"]').disabled = false;
 };
 
+/**
+ * Clears all saved pages from localStorage and resets the dropdown selection UI.
+ * @param {void} none
+ * @returns {void}
+ */
 const handleClear = () => {
   localStorage.removeItem("userPages");
   renderSavedUsersDropdown([]);
   handleClearSelection();
 };
+
+/**
+ * Toggles the "open" class on the dropdown wrapper (used for arrow rotation).
+ * @param {MouseEvent} e - The click event, uses e.currentTarget as the element to toggle.
+ * @returns {void}
+ */
 const toggleDropdown = (e) => {
   e.currentTarget.classList.toggle("open");
 };
 
+/**
+ * Handles selecting a saved page from the dropdown list, updates the label, and closes the dropdown.
+ * @param {MouseEvent} e - The click event from clicking a dropdown list item.
+ * @returns {void}
+ */
 const handleDropdownSelect = (e) => {
   const li = e.target.closest("li");
   if (!li) return;
@@ -166,6 +208,11 @@ const handleDropdownSelect = (e) => {
     .classList.remove("open");
 };
 
+/**
+ * Opens or closes the dropdown list. Disabled when there are no saved pages.
+ * @param {void} none
+ * @returns {void}
+ */
 const handleDropdownToggle = () => {
   const pages = JSON.parse(localStorage.getItem("userPages")) || [];
   if (pages.length === 0) return;
@@ -185,6 +232,11 @@ const handleDropdownToggle = () => {
   dropdown.classList.add("open");
 };
 
+/**
+ * Loads saved pages on startup. Generates a new page if none exist, otherwise renders the last saved page.
+ * @param {void} none
+ * @returns {void}
+ */
 const loadSavedPagesUI = () => {
   const pages = JSON.parse(localStorage.getItem("userPages")) || [];
   if (pages.length === 0) {
@@ -204,6 +256,12 @@ const loadSavedPagesUI = () => {
     document.querySelector('[data-action="save"]').disabled = false;
   }
 };
+
+/**
+ * Resets the dropdown selection state and label back to the default placeholder.
+ * @param {void} none
+ * @returns {void}
+ */
 const handleClearSelection = () => {
   selectedPageId = null;
 
