@@ -88,6 +88,8 @@ export const renderSavedUsersDropdown = (pages) => {
   container.innerHTML = "";
   triggerContainer.classList.toggle("disabled", pages.length === 0);
 
+  document.querySelector('[data-action="clear"]').disabled = pages.length === 0;
+
   pages.forEach((page) => {
     const li = document.createElement("li");
     li.textContent = `${page.mainUser.firstName} ${page.mainUser.lastName}`;

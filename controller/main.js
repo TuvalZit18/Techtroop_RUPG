@@ -23,6 +23,7 @@ const init = () => {
   bindEvents();
   loadSavedPagesUI();
   document.querySelector('[data-action="save"]').disabled = true;
+  document.querySelector('[data-action="load"]').disabled = true;
 };
 
 /**
@@ -203,6 +204,8 @@ const handleDropdownSelect = (e) => {
     selectedPage.mainUser.lastName,
   );
 
+  document.querySelector('[data-action="load"]').disabled = false;
+
   document
     .querySelector(".saved-users-dropdown-content")
     .classList.remove("open");
@@ -254,6 +257,7 @@ const loadSavedPagesUI = () => {
     );
 
     document.querySelector('[data-action="save"]').disabled = false;
+    document.querySelector('[data-action="load"]').disabled = false;
   }
 };
 
@@ -272,4 +276,6 @@ const handleClearSelection = () => {
 
   label.textContent = "Select a saved profile...";
   triggerContainer.classList.remove("has-selection");
+
+  document.querySelector('[data-action="load"]').disabled = true;
 };
